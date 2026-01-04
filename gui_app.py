@@ -29,8 +29,8 @@ DATA_DIR = "./data"
 # --- 2. 核心引擎初始化 (使用 Gemini) ---
 @st.cache_resource
 def init_expert_system():
-    # 改用 Gemini API
-    # 嘗試移除 models/ 前綴，並統一參數名稱
+    # 1. 統一使用 model_name 參數
+    # 2. 移除字串前的 models/ 前綴 (避免路徑重複疊加導致 404)
     Settings.llm = Gemini(model_name="gemini-1.5-flash", api_key=GOOGLE_API_KEY)
     Settings.embed_model = GeminiEmbedding(model_name="text-embedding-004", api_key=GOOGLE_API_KEY)
     
