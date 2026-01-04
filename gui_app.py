@@ -30,8 +30,9 @@ DATA_DIR = "./data"
 @st.cache_resource
 def init_expert_system():
     # 改用 Gemini API
-    Settings.llm = Gemini(model="models/gemini-1.5-flash", api_key=GOOGLE_API_KEY)
-    Settings.embed_model = GeminiEmbedding(model_name="models/text-embedding-004", api_key=GOOGLE_API_KEY)
+    # 嘗試移除 models/ 前綴，並統一參數名稱
+    Settings.llm = Gemini(model_name="gemini-1.5-flash", api_key=GOOGLE_API_KEY)
+    Settings.embed_model = GeminiEmbedding(model_name="text-embedding-004", api_key=GOOGLE_API_KEY)
     
     # 持久化邏輯
     if not os.path.exists(PERSIST_DIR):
